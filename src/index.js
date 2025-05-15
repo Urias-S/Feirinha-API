@@ -35,3 +35,11 @@ server.get('/items', (req, res) => {
   }
   res.send(lista);
 })
+
+server.get('/items/:id', (req, res) => {
+  const { id } = req.params;
+  if (id <= 0) return res.status(400).send('Id inválido!');
+  const item = lista.find(item => item.id === Number(id));
+  if (item) return res.send(item);
+  else res.status(404).send('Id não encontrado!');
+})
