@@ -28,5 +28,10 @@ server.post('/items', (req, res) => {
 })
 
 server.get('/items', (req, res) => {
+  const { type } = req.query
+  if (type) {
+    const filtrados = lista.filter(item => item.type === type);
+    res.send(filtrados);
+  }
   res.send(lista);
 })
